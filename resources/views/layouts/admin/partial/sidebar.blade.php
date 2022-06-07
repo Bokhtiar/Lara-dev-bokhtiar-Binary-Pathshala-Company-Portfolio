@@ -15,7 +15,7 @@
         </a>
         <ul id="service-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="@route('admin.service.index')">
               <i class="bi bi-circle"></i><span>List of Service</span>
             </a>
           </li>

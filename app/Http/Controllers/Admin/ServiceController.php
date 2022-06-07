@@ -16,7 +16,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $servies = Service::latest()->get();
+            return view('admin.modules.service.index', compact('servies'));
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 
     /**
@@ -47,7 +52,7 @@ class ServiceController extends Controller
                     'body' => $request->body,
                     'image' => json_encode($image)
                 ]);
-                
+
                 if (!empty($service)) {
                     DB::commit();
                     return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
