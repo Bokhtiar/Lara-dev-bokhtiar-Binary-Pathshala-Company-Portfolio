@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -35,7 +37,27 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = Service::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $image = Service::query()->Image($request);
+                $service = Service::create([
+                    'name' => $request->name,
+                    'body' => $request->body,
+                    'image' => json_encode($image)
+                ]);
+                
+                if (!empty($service)) {
+                    DB::commit();
+                    return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**

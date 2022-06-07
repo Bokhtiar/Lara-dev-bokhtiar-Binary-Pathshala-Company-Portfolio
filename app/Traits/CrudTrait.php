@@ -39,4 +39,5 @@ trait CrudTrait
             $model->save();
         }
     }
+
 }
