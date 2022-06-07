@@ -23,4 +23,5 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
 
     /*service */
     Route::resource('service', ServiceController::class);
+    Route::get('service/status/{service_id}', [ServiceController::class, 'status'])->name('service.status');
 });

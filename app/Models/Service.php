@@ -13,6 +13,9 @@ class Service extends Model
     use HasFactory;
     use CrudTrait;
 
+    protected $table='services';
+    protected $primaryKey='service_id';
+
     protected $fillable = [
         'service_id',
         'name',
@@ -38,4 +41,11 @@ class Service extends Model
         }
         return $image;
     }
+
+
+    public function scopeFindID($q, $id)
+    {
+        return self::where('service_id', $id)->first();
+    }
+
 }

@@ -24,13 +24,11 @@ trait CrudTrait
         return $q->where('name','like','%'.$search_key.'%');
     }
 
-    public function scopeDetails($q, $id)
-    {
-        return $q->where('id', $id)->first();
-    }
+
 
     public function scopeStatus($q, $model)
     {
+
         if($model->status == 0){
             $model->status = 1;
             $model->save();

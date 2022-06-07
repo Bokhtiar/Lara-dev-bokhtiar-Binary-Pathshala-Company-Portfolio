@@ -17,7 +17,7 @@ class ServiceController extends Controller
     public function index()
     {
         try {
-            $servies = Service::latest()->get();
+            $servies = Service::latest()->get(['service_id', 'name', 'image','status']);
             return view('admin.modules.service.index', compact('servies'));
         } catch (\Throwable $th) {
             return $th->getMessage();
@@ -108,5 +108,22 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+     /**
+     * status change the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function status($id)
+    {
+        try {
+            $service = Service::query()->FindID($id); //self trait
+            Service::query()->Status($service); // crud trait
+            return redirect()->route('admin.service.index')->with('warning','service Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

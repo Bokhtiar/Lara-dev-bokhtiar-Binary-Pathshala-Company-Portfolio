@@ -26,6 +26,9 @@
             <div class="col-lg-12">
 
                 <div class="card">
+                    <div class="card-header">
+                        <x-notification></x-notification>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Service Table</h5>
 
@@ -57,10 +60,13 @@
                                         @endif
 
                                         <td>
-                                            <button type="button" class="btn btn-success"><i
-                                                    class="bi bi-check-circle"></i></button>
-                                            <button type="button" class="btn btn-warning"><i
-                                                    class="bi bi-exclamation-triangle"></i></button>
+                                            @if ($item->status == 1)
+                                            <a class="btn btn-sm btn-success" href="@route('admin.service.status',$item->service_id)"><i
+                                                class="bi bi-check-circle"></i></a>
+                                            @else
+                                            <a  class="btn btn-warning btn-sm" href="@route('admin.service.status',$item->service_id)"><i
+                                                class="bi bi-exclamation-triangle"></i></a>
+                                            @endif
                                         </td>
                                         <td>
                                             <a class="btn btn-sm btn-danger" href=""> <i
@@ -71,7 +77,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <h2>emply</h2>
+                                    <h2 class="bg-danger text-light text-center">Service Is empty</h2>
                                 @endforelse
                             </tbody>
                         </table>
