@@ -45,7 +45,7 @@ class Service extends Model
 
     public function scopeFindID($q, $id)
     {
-        return self::where('service_id', $id)->first();
+        return self::find($id);
     }
 
 }

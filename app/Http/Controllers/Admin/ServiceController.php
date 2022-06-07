@@ -73,7 +73,12 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = Service::query()->FindID($id);
+            return view('admin.modules.service.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

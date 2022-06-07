@@ -50,7 +50,6 @@
                                         <td>{{ $item->name }}</td>
                                         @php
                                             $image = json_decode($item->image);
-
                                         @endphp
                                         @if (empty($image))
                                             <td>Image Not Selected</td>
@@ -61,19 +60,21 @@
 
                                         <td>
                                             @if ($item->status == 1)
-                                            <a class="btn btn-sm btn-success" href="@route('admin.service.status',$item->service_id)"><i
-                                                class="bi bi-check-circle"></i></a>
+                                                <a class="btn btn-sm btn-success" href="@route('admin.service.status', $item->service_id)"><i
+                                                        class="bi bi-check-circle"></i></a>
                                             @else
-                                            <a  class="btn btn-warning btn-sm" href="@route('admin.service.status',$item->service_id)"><i
-                                                class="bi bi-exclamation-triangle"></i></a>
+                                                <a class="btn btn-warning btn-sm" href="@route('admin.service.status', $item->service_id)"><i
+                                                        class="bi bi-exclamation-triangle"></i></a>
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-danger" href=""> <i
-                                                    class="ri-delete-bin-6-fill"></i></a>
-                                            <a class="btn btn-sm btn-info text-light" href=""> <i
+                                            <a class="btn btn-sm btn-info text-light" href="@route('admin.service.show', $item->service_id)"> <i
                                                     class="ri-eye-fill"></i></a>
                                             <a class="btn btn-sm btn-primary" href=""> <i class="ri-edit-box-fill"></i></a>
+                                            <a class="btn btn-sm btn-danger" href=""> <i
+                                                    class="ri-delete-bin-6-fill"></i></a>
+
+
                                         </td>
                                     </tr>
                                 @empty
