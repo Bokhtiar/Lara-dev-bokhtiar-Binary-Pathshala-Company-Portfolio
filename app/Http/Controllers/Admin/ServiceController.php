@@ -89,7 +89,8 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = Service::query()->FindID($id);
+        return view('admin.modules.service.createOrUpdate', compact('edit'));
     }
 
     /**
@@ -101,7 +102,34 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Service::query()->Validation($request->all());
+        if($validated){
+            try{
+                $update = Service::query()->FindID($id);
+                DB::beginTransaction();
+                $reqImage = $request->image;
+                if($reqImage){
+                    $newimage = Service::query()->Image($request);
+                }else{
+                    $image = $update->image;
+                }
+
+                $serviceU = $update->update([
+                    'name' => $request->name,
+                    'body' => $request->body,
+                    'image' => $reqImage ? json_encode($newimage) : $image,
+                ]);
+
+                if (!empty($serviceU)) {
+                    DB::commit();
+                    return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -112,7 +140,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Service::query()->FindID($id)->delete();
+            return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
      /**

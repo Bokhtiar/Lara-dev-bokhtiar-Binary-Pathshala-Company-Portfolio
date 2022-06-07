@@ -28,6 +28,9 @@
                 <div class="card">
                     <div class="card-header">
                         <x-notification></x-notification>
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Service Table</h5>
@@ -67,12 +70,17 @@
                                                         class="bi bi-exclamation-triangle"></i></a>
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="form-inline">
                                             <a class="btn btn-sm btn-info text-light" href="@route('admin.service.show', $item->service_id)"> <i
                                                     class="ri-eye-fill"></i></a>
-                                            <a class="btn btn-sm btn-primary" href=""> <i class="ri-edit-box-fill"></i></a>
-                                            <a class="btn btn-sm btn-danger" href=""> <i
-                                                    class="ri-delete-bin-6-fill"></i></a>
+                                            <a class="btn btn-sm btn-primary" href="@route('admin.service.edit', $item->service_id)"> <i
+                                                    class="ri-edit-box-fill"></i></a>
+                                            <form method="POST" action="@route('admin.service.destroy',$item->service_id)" class="mt-1">
+                                                @csrf
+                                                @method('Delete')
+                                                <button class="btn btn-sm btn-danger" type="submit"> <i
+                                                    class="ri-delete-bin-6-fill"></i></button>
+                                            </form>
 
 
                                         </td>

@@ -1,6 +1,11 @@
 @extends('layouts.admin.app')
 @section('title', @$edit ? 'Service Update' : 'Service Create')
 @section('css')
+    <style>
+        .zoom:hover {
+            transform: scale(2.5);
+        }
+    </style>
 @endsection
 
 @section('admin_content')
@@ -30,14 +35,14 @@
             @endif
 
             @if (session('error'))
-<div class="alert alert-danger">{{ session('error') }}</div>
-@endif
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             {{-- form validation errors end --}}
         </div>
         <div class="card-body">
             <h5 class="card-title">Service {{ @$edit ? 'Update' : 'Create' }} Form</h5>
             @if (@$edit)
-                <form action="@route('admin.service.update', @$edit->service_id)" method="" enctype="multipart/form-data">
+                <form action="@route('admin.service.update', @$edit->service_id)" method="POST" enctype="multipart/form-data">
                     @method('put')
                 @else
                     <form action="@route('admin.service.store')" method="post" enctype="multipart/form-data">
@@ -52,19 +57,34 @@
 
                 <div class="col-md-6 col-lg-6 my-2">
                     <label for="" class="form-label">Service Icon <span class="text-danger">*</span></label>
-                    <input required type="file" name="image[]" multiple class="form-control">
+                    <input  type="file" name="image[]" multiple class="form-control">
                     @if (@$edit->image)
-                        image seleted
+                        @php
+                            $image = json_decode($edit->image);
+                        @endphp
+                        @if (empty($image))
+                            <td>Image Not Selected</td>
+                        @else
+                            <td>
+                                <div class="">
+                                    <span>Already Selected Image: </span>
+                                    <img class="zoom" src="{{ asset($image[0]) }}" height="50px" width="50px"
+                                        alt="">
+                                </div>
+                            </td>
+                        @endif
                     @endif
                 </div>
-                <div class="col-md-12 col-lg-12 my-2">
+                <div class="col-md-12 col-lg-12">
                     <label for="">Service Body <span class="text-danger">*</span></label>
-                    <textarea required name="body" class="form-control quill-editor-full"></textarea>
+                    <textarea name="body" class="tinymce-editor">
+                       {!! @$edit->body !!}
+                      </textarea><!-- End TinyMCE Editor -->
                 </div>
             </section>
             <br><br><br>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
             </div>
             </form><!-- End Multi Columns Form -->

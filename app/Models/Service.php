@@ -27,7 +27,6 @@ class Service extends Model
         return Validator::make($request, [
             'name' => 'string | required | max:15 | min:3',
             'body' => 'required',
-            'image' => 'required',
         ])->validate();
     }
 
