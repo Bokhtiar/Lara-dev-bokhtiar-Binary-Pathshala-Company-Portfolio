@@ -33,7 +33,7 @@
                         <table class="table datatable">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">SL</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Status</th>
@@ -56,11 +56,18 @@
                                                     width="50px" alt=""> </td>
                                         @endif
 
-                                        <td>success</td>
                                         <td>
-                                            <a href=""> <i class="ri-delete-bin-6-fill"></i></a>
-                                            <a href="">  <i class="ri-eye-fill"></i></a>
-                                            <a href=""> <i class="ri-edit-box-fill"></i></a>
+                                            <button type="button" class="btn btn-success"><i
+                                                    class="bi bi-check-circle"></i></button>
+                                            <button type="button" class="btn btn-warning"><i
+                                                    class="bi bi-exclamation-triangle"></i></button>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-danger" href=""> <i
+                                                    class="ri-delete-bin-6-fill"></i></a>
+                                            <a class="btn btn-sm btn-info text-light" href=""> <i
+                                                    class="ri-eye-fill"></i></a>
+                                            <a class="btn btn-sm btn-primary" href=""> <i class="ri-edit-box-fill"></i></a>
                                         </td>
                                     </tr>
                                 @empty
