@@ -37,7 +37,7 @@
         <div class="card-body">
             <h5 class="card-title">About {{ @$edit ? 'Update' : 'Create' }} Form</h5>
             @if (@$edit)
-                <form action="@route('admin.about.update', @$edit->About_id)" method="POST">
+                <form action="@route('admin.about.update', @$edit->about_id)" method="POST">
                     @method('put')
                 @else
                     <form action="@route('admin.about.store')" method="post" >

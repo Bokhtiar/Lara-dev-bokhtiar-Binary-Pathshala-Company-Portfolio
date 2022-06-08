@@ -37,11 +37,21 @@
                 </div>
             </div>
 
-            @if ($item->status == 1)
+            <section class="form-inline">
+                @if ($item->status == 1)
             <a href="@route('admin.about.status', $item->about_id)" class="btn btn-sm btn-success">Active</a>
             @else
             <a href="@route('admin.about.status', $item->about_id)" class="btn btn-sm btn-danger">In-Active</a>
             @endif
+            <a href="@route('admin.about.edit', $item->about_id)" class="btn btn-sm btn-info text-light">Edit</a>
+
+            <form action="@route('admin.about.destroy', $item->about_id)" method="post">
+                @method('Delete')
+                @csrf
+                <button class="btn btn-sm btn-danger my-1">Delete</button>
+            </form>
+        </section>
+
         </section>
     @empty
         <h1 class="bg-danger text-light ">About is Empty</h1>

@@ -146,7 +146,7 @@ class ServiceController extends Controller
     {
         try {
             Service::query()->FindID($id)->delete();
-            return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+            return redirect()->route('admin.service.index')->with('success','Service Deleted successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }
