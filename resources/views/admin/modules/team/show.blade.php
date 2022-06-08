@@ -15,62 +15,55 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
-
-    <section id="portfolio-details" class="portfolio-details">
+    <section id="team" class="team">
         <div class="container">
 
-          <div class="row gy-4">
+          <div class="section-title">
+            <h2>Team {{ $show->name }} Profile</h2>
+          </div>
 
-            <div class="col-lg-8">
-              <div class="portfolio-details-slider swiper">
-                <div class="swiper-wrapper align-items-center">
-
+          <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member">
+                <div class="member-img">
                     @php
-                    $images = json_decode($show->images);
+                        $image = json_decode($show->image);
                     @endphp
+                    @if (empty($image))
+                        <td>Image Not Selected</td>
+                    @else
+                        <td><img class="zoom img-fluid" src="{{ asset($image[0]) }}" alt="">
+                        </td>
+                    @endif
+                  <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                  <div class="social">
+                    @isset($show->twitter)
+                    <a target="blank" href="{{ $show->twitter }}"><i class="bi bi-twitter"></i></a>
+                    @endisset
 
-                    @forelse ($images as $image)
-                    <img class="zoom" src="{{ asset($image) }}" height="200px" width="100%" alt=""><br><br>
-                    @empty
-                    <h2 class="btn btn-danger form-control">No Select Image</h2>
-                    @endforelse
+                      @isset($show->fb)
+                      <a target="blank" href="{{ $show->fb }}"><i class="bi bi-facebook"></i></a>
+                      @endisset
+
+                      @isset($show->instagram)
+                      <a target="blank" href="{{ $show->instagram }}"><i class="bi bi-instagram"></i></a>
+                      @endisset
+
+                      @isset($show->linkdin)
+                      <a target="blank" href="{{ $show->linkdin }}"><i class="bi bi-linkedin"></i></a>
+                      @endisset
+                  </div>
                 </div>
-                <div class="swiper-pagination"></div>
+                <div class="member-info">
+                  <h4>{{ $show->name }}</h4>
+                  <span>{{ $show->designation }}</span>
+                </div>
               </div>
             </div>
-
-            <div class="col-lg-4">
-              <div class="portfolio-info">
-                <h3>Project information</h3>
-                <ul>
-                  <li><strong>Service</strong>: {{ $show->service ? $show->service->name : "Data Not Found" }}</li>
-                  @isset($show->client_name)
-                  <li><strong>Client</strong>: {{ $show->client_name }}</li>
-                  @endisset
-
-                  @isset($show->project_date)
-                  <li><strong>Project date</strong>: {{ $show->project_date }}</li>
-                  @endisset
-
-                  @isset($show->project_url)
-                  <li><strong>Project URL</strong>: <a href="#">{{ $show->project_url }}</a></li>
-                  @endisset
-
-
-                </ul>
-              </div>
-              <div class="portfolio-description">
-                <h2>{{ $show->title }} portfolio detail</h2>
-                <p>
-                 {!! $show->body !!}
-                </p>
-              </div>
-            </div>
-
           </div>
 
         </div>
-      </section><!-- End Portfolio Details Section -->
+      </section><!-- End Team Section -->
 
 @section('js')
 @endsection

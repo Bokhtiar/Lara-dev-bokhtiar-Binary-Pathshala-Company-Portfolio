@@ -78,7 +78,12 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = Team::query()->FindID($id);
+            return view('admin.modules.team.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -89,7 +94,12 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $edit = Team::query()->FindID($id);
+        return view('admin.modules.team.createOrUpdate', compact('edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -101,7 +111,39 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Team::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $update = Team::query()->FindID($id);
+                $reqImage = $request->image;
+                if($reqImage){
+                    $newimage = Team::query()->Image($request);
+                }else{
+                    $image = $update->image;
+                }
+
+                $team = $update->update([
+                    'name' => $request->name,
+                    'designation' => $request->designation,
+                    'image' => $reqImage ? json_encode($newimage) : $image,
+
+                    'fb' => $request->fb,
+                    'instagram' => $request->instagram,
+                    'twitter' => $request->twitter,
+                    'linkdin' => $request->linkdin,
+                ]);
+
+                if (!empty($team)) {
+                    DB::commit();
+                    return redirect()->route('admin.team.index')->with('success','Team Updated successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -112,6 +154,11 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Team::query()->FindID($id)->delete();
+            return redirect()->route('admin.team.index')->with('success','Team Delete successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

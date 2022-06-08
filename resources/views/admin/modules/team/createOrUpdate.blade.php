@@ -86,25 +86,25 @@
 
                 <div class="col-md-6 col-lg-6 my-2">
                     <label for="" class="form-label">Facebook </label>
-                    <input required type="text" class="form-control" name="fb" value="{{ @$edit->fb }}"
+                    <input type="text" class="form-control" name="fb" value="{{ @$edit->fb }}"
                         placeholder="type here Team Facebook">
                 </div>
 
                 <div class="col-md-6 col-lg-6 my-2">
                     <label for="" class="form-label">Instagram </label>
-                    <input required type="text" class="form-control" name="instagram" value="{{ @$edit->instagram }}"
+                    <input type="text" class="form-control" name="instagram" value="{{ @$edit->instagram }}"
                         placeholder="type here Team Instagram">
                 </div>
 
                 <div class="col-md-6 col-lg-6 my-2">
                     <label for="" class="form-label">Twitter </label>
-                    <input required type="text" class="form-control" name="twitter" value="{{ @$edit->twitter }}"
+                    <input type="text" class="form-control" name="twitter" value="{{ @$edit->twitter }}"
                         placeholder="type here Team Twitter">
                 </div>
 
                 <div class="col-md-6 col-lg-6 my-2">
                     <label for="" class="form-label">Linkdin </label>
-                    <input required type="text" class="form-control" name="linkdin" value="{{ @$edit->linkdin }}"
+                    <input type="text" class="form-control" name="linkdin" value="{{ @$edit->linkdin }}"
                         placeholder="type here Team Linkdin">
                 </div>
 
