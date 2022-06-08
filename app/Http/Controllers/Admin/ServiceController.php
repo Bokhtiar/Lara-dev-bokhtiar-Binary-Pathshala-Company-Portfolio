@@ -20,7 +20,7 @@ class ServiceController extends Controller
             $servies = Service::latest()->get(['service_id', 'name', 'image','status']);
             return view('admin.modules.service.index', compact('servies'));
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            abort(404);
         }
     }
 
