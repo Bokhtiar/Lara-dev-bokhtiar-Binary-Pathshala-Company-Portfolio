@@ -28,6 +28,7 @@ class Service extends Model
             'name' => 'string | required | max:15 | min:3',
             'body' => 'required',
         ])->validate();
+        
     }
 
     public function scopeImage($value, $request){

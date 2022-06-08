@@ -20,7 +20,7 @@ class ServiceController extends Controller
             $servies = Service::latest()->get(['service_id', 'name', 'image','status']);
             return view('admin.modules.service.index', compact('servies'));
         } catch (\Throwable $th) {
-            abort(404);
+            throw $th;
         }
     }
 
@@ -89,8 +89,12 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        $edit = Service::query()->FindID($id);
+        try {
+            $edit = Service::query()->FindID($id);
         return view('admin.modules.service.createOrUpdate', compact('edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
