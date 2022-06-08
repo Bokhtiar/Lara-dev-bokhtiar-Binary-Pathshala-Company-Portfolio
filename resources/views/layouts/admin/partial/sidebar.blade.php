@@ -28,6 +28,25 @@
       </li><!-- End service Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Portfolio-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Portfolios</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Portfolio-nav" class="nav-content collapse " data-bs-parent="#Portfolio-nav">
+          <li>
+            <a href="@route('admin.portfolio.index')">
+              <i class="bi bi-circle"></i><span>List of Portfolio</span>
+            </a>
+          </li>
+          <li>
+            <a href="@route('admin.portfolio.create')">
+              <i class="bi bi-circle"></i><span>Create of Portfolio</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End service Nav -->
+
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>

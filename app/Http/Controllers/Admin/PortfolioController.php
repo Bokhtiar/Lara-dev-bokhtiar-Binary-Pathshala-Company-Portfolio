@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Portfolio;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ServiceController extends Controller
+class PortfolioController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,8 +18,8 @@ class ServiceController extends Controller
     public function index()
     {
         try {
-            $servies = Service::latest()->get(['service_id', 'name', 'image','status']);
-            return view('admin.modules.service.index', compact('servies'));
+            $portfolios = Portfolio::latest()->get(['portfolio_id', 'title', 'service_id', 'status']);
+            return view('admin.modules.portfolio.index', compact('portfolios'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -31,7 +32,12 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('admin.modules.service.createOrUpdate');
+        try {
+            $servies = Service::query()->Active()->latest()->get(['service_id', 'name']);
+            return view('admin.modules.portfolio.createOrUpdate', compact('servies'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -42,20 +48,24 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = Service::query()->Validation($request->all());
+        $validated = portfolio::query()->Validation($request->all());
         if($validated){
             try{
                 DB::beginTransaction();
-                $image = Service::query()->Image($request);
-                $service = Service::create([
-                    'name' => $request->name,
+                $images = portfolio::query()->Images($request);
+                $portfolio = portfolio::create([
+                    'service_id' => $request->service_id,
+                    'title' => $request->title,
+                    'client_name' => $request->client_name,
+                    'project_url' => $request->project_url,
+                    'project_date' => $request->project_date,
                     'body' => $request->body,
-                    'image' => json_encode($image)
+                    'images' => json_encode($images)
                 ]);
 
-                if (!empty($service)) {
+                if (!empty($portfolio)) {
                     DB::commit();
-                    return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+                    return redirect()->route('admin.portfolio.index')->with('success','portfolio Created successfully!');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -74,8 +84,8 @@ class ServiceController extends Controller
     public function show($id)
     {
         try {
-            $show = Service::query()->FindID($id);
-            return view('admin.modules.service.show', compact('show'));
+            $show = Portfolio::query()->FindID($id);
+            return view('admin.modules.portfolio.show', compact('show',));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -90,8 +100,9 @@ class ServiceController extends Controller
     public function edit($id)
     {
         try {
-            $edit = Service::query()->FindID($id);
-        return view('admin.modules.service.createOrUpdate', compact('edit'));
+            $servies = Service::query()->Active()->latest()->get(['service_id', 'name']);
+            $edit = Portfolio::query()->FindID($id);
+            return view('admin.modules.portfolio.createOrUpdate', compact('edit', 'servies'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -106,27 +117,33 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = Service::query()->Validation($request->all());
+        $validated = Portfolio::query()->Validation($request->all());
         if($validated){
             try{
-                $update = Service::query()->FindID($id);
                 DB::beginTransaction();
-                $reqImage = $request->image;
+                $update = Portfolio::query()->FindID($id);
+
+                $reqImage = $request->images;
                 if($reqImage){
-                    $newimage = Service::query()->Image($request);
+                    $newimage = Portfolio::query()->Images($request);
                 }else{
-                    $image = $update->image;
+                    $image = $update->images;
                 }
 
-                $serviceU = $update->update([
-                    'name' => $request->name,
+
+                $portfolioU = $update->update([
+                    'service_id' => $request->service_id,
+                    'title' => $request->title,
+                    'client_name' => $request->client_name,
+                    'project_url' => $request->project_url,
+                    'project_date' => $request->project_date,
                     'body' => $request->body,
-                    'image' => $reqImage ? json_encode($newimage) : $image,
+                    'images' => $reqImage ? json_encode($newimage) : $image,
                 ]);
 
-                if (!empty($serviceU)) {
+                if (!empty($portfolioU)) {
                     DB::commit();
-                    return redirect()->route('admin.service.index')->with('success','Service Created successfully!');
+                    return redirect()->route('admin.portfolio.index')->with('success','portfolio Created successfully!');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -145,8 +162,8 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         try {
-            Service::query()->FindID($id)->delete();
-            return redirect()->route('admin.service.index')->with('success','Service Delete successfully!');
+            Portfolio::query()->FindID($id)->delete();
+            return redirect()->route('admin.portfolio.index')->with('success','portfolio Deleted successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -161,9 +178,9 @@ class ServiceController extends Controller
     public function status($id)
     {
         try {
-            $service = Service::query()->FindID($id); //self trait
-            Service::query()->Status($service); // crud trait
-            return redirect()->route('admin.service.index')->with('warning','service Status Change successfully!');
+            $portfolio = Portfolio::query()->FindID($id); //self trait
+            Portfolio::query()->Status($portfolio); // crud trait
+            return redirect()->route('admin.portfolio.index')->with('warning','portfolio Status Change successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }
