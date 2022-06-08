@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,7 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     /*service */
     Route::resource('service', ServiceController::class);
     Route::get('service/status/{service_id}', [ServiceController::class, 'status'])->name('service.status');
+    /*about*/
+    Route::resource('about', AboutController::class);
+    Route::get('about/status/{about_id}', [AboutController::class, 'status'])->name('about.status');
 });

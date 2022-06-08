@@ -12,8 +12,8 @@ class About extends Model
     use HasFactory;
     use CrudTrait;
 
-    protected $table='services';
-    protected $primaryKey='service_id';
+    protected $table='abouts';
+    protected $primaryKey='about_id';
 
     protected $fillable = [
         'about_id',

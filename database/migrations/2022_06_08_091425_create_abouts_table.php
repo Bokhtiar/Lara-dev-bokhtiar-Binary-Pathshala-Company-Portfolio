@@ -17,8 +17,8 @@ class CreateAboutsTable extends Migration
             $table->id('about_id');
             $table->string('title')->require()->unique();
             $table->longText('short_des')->require();
-            $table->string('left_des')->require();
-            $table->string('right_des')->require();
+            $table->longText('left_des')->require();
+            $table->longText('right_des')->require();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

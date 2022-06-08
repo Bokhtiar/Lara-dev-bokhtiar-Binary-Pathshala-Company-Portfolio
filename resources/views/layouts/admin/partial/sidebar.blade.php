@@ -25,7 +25,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End service Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -100,12 +100,22 @@
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
-          <i class="bi bi-question-circle"></i>
-          <span>About</span>
+        <a class="nav-link collapsed" data-bs-target="#about-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>About</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
-
+        <ul id="about-nav" class="nav-content collapse " data-bs-parent="#about-nav">
+          <li>
+            <a href="@route('admin.about.index')">
+              <i class="bi bi-circle"></i><span>About</span>
+            </a>
+          </li>
+          <li>
+            <a href="@route('admin.about.create')">
+              <i class="bi bi-circle"></i><span>Create of About</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End service Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
