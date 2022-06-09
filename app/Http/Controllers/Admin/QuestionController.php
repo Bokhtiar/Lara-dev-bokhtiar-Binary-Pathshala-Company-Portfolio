@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -14,7 +16,12 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $questions = Question::latest()->get(['question_id', 'question', 'ans']);
+            return view('admin.modules.question.index', compact('questions'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -24,7 +31,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.modules.question.createOrUpdate');
     }
 
     /**
@@ -35,7 +42,25 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = Question::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $question = Question::create([
+                    'question' => $request->question,
+                    'ans' => $request->ans,
+                ]);
+
+                if (!empty($question)) {
+                    DB::commit();
+                    return redirect()->route('admin.Question.index')->with('success','Question Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**

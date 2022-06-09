@@ -12,8 +12,8 @@ class Question extends Model
     use HasFactory;
     use CrudTrait;
 
-    protected $table='services';
-    protected $primaryKey='service_id';
+    protected $table='questions';
+    protected $primaryKey='question_id';
 
     protected $fillable = [
         'question_id',

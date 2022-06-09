@@ -92,12 +92,31 @@
             </a>
           </li>
           <li>
-            <a href="icons-boxicons.html">
-              <i class="bi bi-circle"></i><span>Boxicons</span>
+            <a href="@route('admin.price.create')">
+              <i class="bi bi-circle"></i><span>Create Of Price</span>
             </a>
           </li>
         </ul>
       </li><!-- End price Nav -->
+
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Question</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="question-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="@route('admin.question.index')">
+              <i class="bi bi-circle"></i><span>List Of Question</span>
+            </a>
+          </li>
+          <li>
+            <a href="@route('admin.question.create')">
+              <i class="bi bi-circle"></i><span>Create Of Question</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Question Nav -->
 
       <li class="nav-heading">Setting</li>
       <li class="nav-item">
