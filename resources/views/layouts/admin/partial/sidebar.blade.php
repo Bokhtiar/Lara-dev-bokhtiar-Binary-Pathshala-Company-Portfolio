@@ -128,7 +128,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End service Nav -->
+      </li><!-- End about Nav -->
+
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
@@ -137,9 +139,12 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+          @php
+              $id = 1;
+          @endphp
+        <a class="nav-link collapsed" href="@route('admin.web-setting.create')">
           <i class="bi bi-card-list"></i>
-          <span>Register</span>
+          <span>Web Setting</span>
         </a>
       </li><!-- End Register Page Nav -->
 
