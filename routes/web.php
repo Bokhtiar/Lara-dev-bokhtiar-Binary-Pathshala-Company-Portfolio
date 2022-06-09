@@ -9,13 +9,15 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
 use App\Models\About;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
     $about = About::query()->Active()->first();
-    return view('user.index');
+    $services = Service::query()->Active()->get();
+    return view('user.index', compact('about', 'services'));
 });
 
 Auth::routes();

@@ -8,27 +8,17 @@
 
       <div class="section-title">
         <h2>About</h2>
-        <h3>Learn More <span>About Us</span></h3>
-        <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+        <h3>{{ $about->title }}</span></h3>
+        <p>{{ $about->short_des }}.</p>
       </div>
 
       <div class="row content">
         <div class="col-lg-6">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-          </p>
-          <ul>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-          </ul>
+          {!! $about->left_des !!}.
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0">
           <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+           {!! $about->right_des !!}.
           </p>
           <a href="#" class="btn-learn-more">Learn More</a>
         </div>
@@ -36,6 +26,8 @@
 
     </div>
   </section><!-- End About Section -->
+
+
   <!-- ======= Services Section ======= -->
   <section id="services" class="services">
     <div class="container">
@@ -47,43 +39,31 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bxl-dribbble"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          @forelse ($services as $item)
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon">
+                @php
+                    $image = json_decode($item->image);
+                    @endphp
+                    @if (empty($image))
+                        <td>Image Not Selected</td>
+                    @else
+                        <img class="zoom" src="{{ asset($image[0]) }}" height="50px" width="50px" alt="">
+                    @endif
+                </div>
+              <h4 class="title"><a href="">{{ $item->name }}</a></h4>
+              <p class="description text-light">{!! $item->body !!}</p>
+            </div>
           </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-file"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-tachometer"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-world"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
-        </div>
-
+          @empty
+          <p>No Available Service</p>
+          @endforelse
       </div>
-
     </div>
   </section><!-- End Services Section -->
-  <!-- ======= Features Section ======= -->
+
+  {{-- <!-- ======= Features Section ======= -->
   <section id="features" class="features">
     <div class="container">
 
@@ -163,7 +143,8 @@
       </div>
 
     </div>
-  </section><!-- End Features Section -->
+  </section><!-- End Features Section --> --}}
+
   <!-- ======= Cta Section ======= -->
   <section id="cta" class="cta">
     <div class="container">
@@ -171,7 +152,7 @@
       <div class="text-center">
         <h3>Call To Action</h3>
         <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <a class="cta-btn" href="#">Call To Action</a>
+        <a class="cta-btn" href="tel:01638107361">Call To Action</a>
       </div>
 
     </div>
