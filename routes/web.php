@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
 use App\Models\About;
 use App\Models\Portfolio;
+use App\Models\Price;
+use App\Models\Question;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +21,9 @@ Route::get('/', function () {
     $about = About::query()->Active()->first();
     $services = Service::query()->Active()->get();
     $portfolios = Portfolio::query()->Active()->get();
-    return view('user.index', compact('about', 'services','portfolios'));
+    $prices = Price::query()->Active()->get();
+    $questions = Question::all();
+    return view('user.index', compact('about', 'services','portfolios','prices','questions'));
 });
 
 Auth::routes();
