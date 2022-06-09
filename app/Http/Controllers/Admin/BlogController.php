@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -14,7 +18,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $blogs = Blog::latest()->get(['blog_id', 'title', 'service_id','status']);
+            return view('admin.modules.blog.index', compact('blogs'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -24,7 +33,13 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $services = Service::latest()->get(['service_id', 'name']);
+            return view('admin.modules.blog.createOrUpdate', compact('services'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
     /**
@@ -35,7 +50,29 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = Blog::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $image = Blog::query()->Image($request);
+                $blog = Blog::create([
+                    'title' => $request->title,
+                    'user_id' => Auth::id(),
+                    'service_id' => $request->service_id,
+                    'body' => $request->body,
+                    'image' => json_encode($image)
+                ]);
+
+                if (!empty($blog)) {
+                    DB::commit();
+                    return redirect()->route('admin.blog.index')->with('success','Blog Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**

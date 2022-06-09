@@ -39,5 +39,5 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
      Route::get('team/status/{team_id}', [TeamController::class, 'status'])->name('team.status');
     /*blog */
      Route::resource('blog', BlogController::class);
-     Route::get('team/status/{team_id}', [BlogController::class, 'status'])->name('team.status');
+     Route::get('blog/status/{team_id}', [BlogController::class, 'status'])->name('blog.status');
 });

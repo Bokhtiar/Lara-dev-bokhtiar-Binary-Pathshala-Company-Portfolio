@@ -69,12 +69,12 @@
         </a>
         <ul id="blog-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="blog-chartjs.html">
+            <a href="@route('admin.blog.index')">
               <i class="bi bi-circle"></i><span>List Of Blog</span>
             </a>
           </li>
           <li>
-            <a href="blog-apexcharts.html">
+            <a href="@route('admin.blog.create')">
               <i class="bi bi-circle"></i><span>Create Of Blog</span>
             </a>
           </li>

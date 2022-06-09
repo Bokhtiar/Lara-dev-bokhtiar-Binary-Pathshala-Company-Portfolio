@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
             $table->integer('service_id')->require();
             $table->integer('user_id')->require();
             $table->text('image')->require();
+            $table->longText('body')->require();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
