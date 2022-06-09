@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
 use App\Models\About;
+use App\Models\Portfolio;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,13 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $about = About::query()->Active()->first();
     $services = Service::query()->Active()->get();
-    return view('user.index', compact('about', 'services'));
+    $portfolios = Portfolio::query()->Active()->get();
+    return view('user.index', compact('about', 'services','portfolios'));
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('portfolio/detail/{id}', [App\Http\Controllers\User\PortfolioController::class, 'show'])->name('portfolio.detail');
 
 Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],function(){
     Route::get('dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');
