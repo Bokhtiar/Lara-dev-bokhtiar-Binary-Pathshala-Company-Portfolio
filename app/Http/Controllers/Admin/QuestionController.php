@@ -53,7 +53,7 @@ class QuestionController extends Controller
 
                 if (!empty($question)) {
                     DB::commit();
-                    return redirect()->route('admin.Question.index')->with('success','Question Created successfully!');
+                    return redirect()->route('admin.question.index')->with('success','Question Created successfully!');
                 }
                 throw new \Exception('Invalid About Information');
             }catch(\Exception $ex){
@@ -64,17 +64,6 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -82,7 +71,12 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $edit = Question::query()->FindID($id);
+            return view('admin.modules.question.createOrUpdate', compact('edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -94,7 +88,26 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Question::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $update = Question::query()->FindID($id);
+                $question = $update->update([
+                    'question' => $request->question,
+                    'ans' => $request->ans,
+                ]);
+
+                if (!empty($question)) {
+                    DB::commit();
+                    return redirect()->route('admin.question.index')->with('success','Question Updated successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -105,6 +118,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Question::query()->FindID($id)->delete();
+            return redirect()->route('admin.question.index')->with('success','Question Delete successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
