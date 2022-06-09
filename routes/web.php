@@ -8,11 +8,13 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
+use App\Models\About;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
+    $about = About::query()->Active()->first();
     return view('user.index');
 });
 

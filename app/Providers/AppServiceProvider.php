@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\WebSetting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('route', function ($expression) {
             return "<?php echo route ($expression); ?>";
+        });
+
+        view()->composer('*', function($view) {
+            $view->with('webSetting', WebSetting::query()->first());
         });
 
     }

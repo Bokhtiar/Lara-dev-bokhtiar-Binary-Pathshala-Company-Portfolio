@@ -9,7 +9,7 @@
         <h1>Question {{ @$edit ? 'Update' : 'Create' }} Form</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                 <li class="breadcrumb-item">Question</li>
                 <li class="breadcrumb-item active">Question {{ @$edit ? 'Update' : 'Create' }} Form</li>
             </ol>

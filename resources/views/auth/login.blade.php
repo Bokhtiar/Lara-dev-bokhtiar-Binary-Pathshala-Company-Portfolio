@@ -1,7 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.user.app')
+@section('title', 'Login')
+@section('css')
+@endsection
 
-@section('content')
-<div class="container">
+@section('user_content')
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{{ url('/') }}">Home</a></li>
+        <li>Login</li>
+      </ol>
+      <h2>Login</h2>
+    </div>
+</section><!-- End Breadcrumbs -->
+
+<div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -70,4 +84,6 @@
         </div>
     </div>
 </div>
+@section('js')
+@endsection
 @endsection
