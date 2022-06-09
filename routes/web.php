@@ -13,6 +13,7 @@ use App\Models\Portfolio;
 use App\Models\Price;
 use App\Models\Question;
 use App\Models\Service;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,8 @@ Route::get('/', function () {
     $portfolios = Portfolio::query()->Active()->get();
     $prices = Price::query()->Active()->get();
     $questions = Question::all();
-    return view('user.index', compact('about', 'services','portfolios','prices','questions'));
+    $teams = Team::all();
+    return view('user.index', compact('about', 'services','portfolios','prices','questions','teams'));
 });
 
 Auth::routes();

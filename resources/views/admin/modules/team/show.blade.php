@@ -35,7 +35,6 @@
                         <td><img class="zoom img-fluid" src="{{ asset($image[0]) }}" alt="">
                         </td>
                     @endif
-                  <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
                   <div class="social">
                     @isset($show->twitter)
                     <a target="blank" href="{{ $show->twitter }}"><i class="bi bi-twitter"></i></a>
