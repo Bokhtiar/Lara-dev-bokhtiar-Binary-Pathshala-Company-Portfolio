@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
@@ -33,7 +34,10 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     /*portfolio */
     Route::resource('portfolio', PortfolioController::class);
     Route::get('portfolio/status/{portfolio_id}', [PortfolioController::class, 'status'])->name('portfolio.status');
-     /*team */
+    /*team */
      Route::resource('team', TeamController::class);
      Route::get('team/status/{team_id}', [TeamController::class, 'status'])->name('team.status');
+    /*blog */
+     Route::resource('blog', BlogController::class);
+     Route::get('team/status/{team_id}', [BlogController::class, 'status'])->name('team.status');
 });
