@@ -16,7 +16,12 @@ class PriceController extends Controller
      */
     public function index()
     {
-        dd(23);
+        try {
+            $prices = Price::latest()->get(['price_id', 'title', 'designation', 'price', 'status']);
+            return view('admin.modules.price.index', compact('prices'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -72,7 +77,12 @@ class PriceController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = Price::query()->FindID($id);
+            return view('admin.modules.price.show', compact('show'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -107,5 +117,16 @@ class PriceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status($id)
+    {
+        try {
+            $price = Price::query()->FindID($id); //self trait
+            Price::query()->Status($price); // crud trait
+            return redirect()->route('admin.price.index')->with('warning','price Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

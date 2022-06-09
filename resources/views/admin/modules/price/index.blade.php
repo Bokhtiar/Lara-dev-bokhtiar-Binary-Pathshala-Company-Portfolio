@@ -1,17 +1,17 @@
 @extends('layouts.admin.app')
-@section('title', 'List Of Team')
+@section('title', 'List Of Price')
 @section('css')
 @endsection
 
 @section('admin_content')
 
     <div class="pagetitle">
-        <h1>team Tables</h1>
+        <h1>Price Tables</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                 <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">Team Table</li>
+                <li class="breadcrumb-item active">Price Table</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -27,43 +27,45 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Team Table</h5>
+                        <h5 class="card-title">price Table</h5>
 
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>
                                 <tr>
                                     <th scope="col">SL</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Title</th>
                                     <th scope="col">Designation</th>
+                                    <th scope="col">Price</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($teams as $item)
+                                @forelse ($prices as $item)
                                     <tr>
                                         <th scope="row">{{ $loop->index + 1 }}</th>
 
-                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->title }}</td>
 
                                         <td>{{ $item->designation }}</td>
+                                        <td>{{ $item->price }}</td>
 
                                         <td>
                                             @if ($item->status == 1)
-                                                <a class="btn btn-sm btn-success" href="@route('admin.team.status', $item->team_id)"><i
+                                                <a class="btn btn-sm btn-success" href="@route('admin.price.status', $item->price_id)"><i
                                                         class="bi bi-check-circle"></i></a>
                                             @else
-                                                <a class="btn btn-warning btn-sm" href="@route('admin.team.status', $item->team_id)"><i
+                                                <a class="btn btn-warning btn-sm" href="@route('admin.price.status', $item->price_id)"><i
                                                         class="bi bi-exclamation-triangle"></i></a>
                                             @endif
                                         </td>
                                         <td class="form-inline">
-                                            <a class="btn btn-sm btn-info text-light" href="@route('admin.team.show', $item->team_id)"> <i
+                                            <a class="btn btn-sm btn-info text-light" href="@route('admin.price.show', $item->price_id)"> <i
                                                     class="ri-eye-fill"></i></a>
-                                            <a class="btn btn-sm btn-primary" href="@route('admin.team.edit', $item->team_id)"> <i
+                                            <a class="btn btn-sm btn-primary" href="@route('admin.price.edit', $item->price_id)"> <i
                                                     class="ri-edit-box-fill"></i></a>
-                                            <form method="POST" action="@route('admin.team.destroy',$item->team_id)" class="mt-1">
+                                            <form method="POST" action="@route('admin.price.destroy',$item->price_id)" class="mt-1">
                                                 @csrf
                                                 @method('Delete')
                                                 <button class="btn btn-sm btn-danger" type="submit"> <i
@@ -74,7 +76,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <h2 class="bg-danger text-light text-center">Team Is empty</h2>
+                                    <h2 class="bg-danger text-light text-center">price Is empty</h2>
                                 @endforelse
                             </tbody>
                         </table>

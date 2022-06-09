@@ -92,11 +92,6 @@
             </a>
           </li>
           <li>
-            <a href="@route('admin.price.create')">
-              <i class="bi bi-circle"></i><span>Create Of Price</span>
-            </a>
-          </li>
-          <li>
             <a href="icons-boxicons.html">
               <i class="bi bi-circle"></i><span>Boxicons</span>
             </a>
