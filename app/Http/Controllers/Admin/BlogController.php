@@ -83,7 +83,12 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = Blog::query()->FindID($id);
+            return view('admin.modules.blog.show', compact('show'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -118,5 +123,16 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status($id)
+    {
+        try {
+            $blog = Blog::query()->FindID($id); //self trait
+            Blog::query()->Status($blog); // crud trait
+            return redirect()->route('admin.blog.index')->with('warning','Blog Status Change successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

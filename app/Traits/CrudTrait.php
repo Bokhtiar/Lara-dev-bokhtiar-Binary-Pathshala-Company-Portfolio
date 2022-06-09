@@ -28,7 +28,6 @@ trait CrudTrait
 
     public function scopeStatus($q, $model)
     {
-
         if($model->status == 0){
             $model->status = 1;
             $model->save();
