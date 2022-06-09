@@ -93,7 +93,12 @@ class PriceController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $edit = Price::query()->FindID($id);
+            return view('admin.modules.price.createOrUpdate', compact('edit'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -105,7 +110,32 @@ class PriceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Price::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $update = Price::query()->FindID($id);
+                $price = $update->update([
+                    'title' => $request->title,
+                    'designation' => $request->designation,
+                    'price' => $request->price,
+                    'item1' => $request->item1,
+                    'item2' => $request->item2,
+                    'item3' => $request->item3,
+                    'item4' => $request->item4,
+                    'item5' => $request->item5, 
+                ]);
+
+                if (!empty($price)) {
+                    DB::commit();
+                    return redirect()->route('admin.price.index')->with('success','Price Updated successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -116,7 +146,12 @@ class PriceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Price::query()->FindID($id)->delete();
+            return redirect()->route('admin.price.index')->with('success','Price Delete successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function status($id)
