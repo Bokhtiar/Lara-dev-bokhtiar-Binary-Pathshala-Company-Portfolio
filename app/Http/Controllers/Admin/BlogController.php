@@ -99,7 +99,13 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $edit = Blog::query()->FindID($id);
+            $services = Service::latest()->get(['service_id', 'name']);
+            return view('admin.modules.blog.createOrUpdate', compact('services', 'edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -111,7 +117,37 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = Blog::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $update = Blog::query()->FindID($id);
+
+                $reqImage = $request->image;
+                if($reqImage){
+                    $newimage = Service::query()->Image($request);
+                }else{
+                    $image = $update->image;
+                }
+
+                $blog = $update->update([
+                    'title' => $request->title,
+                    'user_id' => Auth::id(),
+                    'service_id' => $request->service_id,
+                    'body' => $request->body,
+                    'image' => $reqImage ? json_encode($newimage) : $image
+                ]);
+
+                if (!empty($blog)) {
+                    DB::commit();
+                    return redirect()->route('admin.blog.index')->with('success','Blog Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
@@ -122,7 +158,12 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Blog::query()->FindID($id)->delete();
+            return redirect()->route('admin.blog.index')->with('success','Blog Delete successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function status($id)
