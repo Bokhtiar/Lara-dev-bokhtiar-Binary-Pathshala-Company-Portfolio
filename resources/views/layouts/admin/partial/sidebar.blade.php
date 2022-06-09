@@ -82,18 +82,18 @@
       </li><!-- End blog Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#price-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Price</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="price-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+            <a href="@route('admin.price.index')">
+              <i class="bi bi-circle"></i><span>List Of Price</span>
             </a>
           </li>
           <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>Remix Icons</span>
+            <a href="@route('admin.price.create')">
+              <i class="bi bi-circle"></i><span>Create Of Price</span>
             </a>
           </li>
           <li>
@@ -102,7 +102,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Icons Nav -->
+      </li><!-- End price Nav -->
 
       <li class="nav-heading">Setting</li>
       <li class="nav-item">

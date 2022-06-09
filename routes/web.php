@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\PriceController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
@@ -42,5 +43,8 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     Route::get('blog/status/{team_id}', [BlogController::class, 'status'])->name('blog.status');
     /*web setting */
     Route::resource('web-setting', webSettingController::class);
+    /*price */
+    Route::resource('price', PriceController::class);
+    Route::get('price/status/{_id}', [PriceController::class, 'status'])->name('price.status');
 
 });
