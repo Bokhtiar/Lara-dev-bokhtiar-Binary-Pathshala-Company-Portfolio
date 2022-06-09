@@ -173,9 +173,8 @@
         <div class="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
-            {{-- <li data-filter=".filter-app">App</li>--}}
             @foreach ($services as $sv)
-            <li data-filter=".{{ $sv->service_id }}">{{ $sv->name }}</li>
+            <li data-filter=".{{$sv->name}}">{{ $sv->name }}</li>
             @endforeach
           </ul>
         </div>
@@ -185,7 +184,7 @@
 
         @foreach ($portfolios as $pf)
 
-        <div class="col-lg-4 col-md-6 portfolio-item {{ $pf->service_id }}">
+        <div class="col-lg-4 col-md-6 portfolio-item {{$pf->service ? $pf->service->name : ''}}">
             @php
             $image = json_decode($pf->images);
             @endphp
@@ -205,7 +204,12 @@
       </div>
 
     </div>
-  </section><!-- End Portfolio Section -->
+  </section>
+
+  <!-- End Portfolio Section -->
+
+
+  <!-- End Portfolio Section -->
   <!-- ======= Pricing Section ======= -->
   <section id="pricing" class="pricing">
     <div class="container">
@@ -319,7 +323,7 @@
     </div>
   </section><!-- End Team Section -->
 
-  
+
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
     <div class="container">
