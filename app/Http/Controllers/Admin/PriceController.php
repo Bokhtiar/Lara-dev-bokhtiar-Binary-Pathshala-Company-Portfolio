@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Price;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PriceController extends Controller
 {
@@ -14,7 +16,7 @@ class PriceController extends Controller
      */
     public function index()
     {
-        //
+        dd(23);
     }
 
     /**
@@ -24,7 +26,7 @@ class PriceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.modules.price.createOrUpdate');
     }
 
     /**
@@ -35,7 +37,31 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = Price::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $price = Price::create([
+                    'title' => $request->title,
+                    'designation' => $request->designation,
+                    'price' => $request->price,
+                    'item1' => $request->item1,
+                    'item2' => $request->item2,
+                    'item3' => $request->item3,
+                    'item4' => $request->item4,
+                    'item5' => $request->item5, 
+                ]);
+
+                if (!empty($price)) {
+                    DB::commit();
+                    return redirect()->route('admin.price.index')->with('success','Price Created successfully!');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                return back()->withError($ex->getMessage());
+                DB::rollBack();
+            }
+        }
     }
 
     /**
