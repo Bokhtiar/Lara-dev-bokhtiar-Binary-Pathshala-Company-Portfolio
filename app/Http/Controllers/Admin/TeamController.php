@@ -17,7 +17,7 @@ class TeamController extends Controller
     public function index()
     {
         try {
-            $teams = Team::latest()->get(['team_id','name', 'designation']);
+            $teams = Team::latest()->get(['team_id','name', 'designation', 'status']);
             return view('admin.modules.team.index', compact('teams'));
         } catch (\Throwable $th) {
             throw $th;
@@ -157,6 +157,17 @@ class TeamController extends Controller
         try {
             Team::query()->FindID($id)->delete();
             return redirect()->route('admin.team.index')->with('success','Team Delete successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function status($id)
+    {
+        try {
+            $team = Team::query()->FindID($id); //self trait
+            Team::query()->Status($team); // crud trait
+            return redirect()->route('admin.team.index')->with('warning','Team Status Change successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }

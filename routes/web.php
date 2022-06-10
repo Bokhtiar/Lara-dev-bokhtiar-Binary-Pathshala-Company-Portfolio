@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
+use App\Http\Controllers\User\BlogController as UserBlogController;
+use App\Http\Controllers\User\PortfolioController as UserPortfolioController;
 use App\Models\About;
 use App\Models\Portfolio;
 use App\Models\Price;
@@ -21,16 +23,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $about = About::query()->Active()->first();
     $services = Service::query()->Active()->get();
-    $portfolios = Portfolio::query()->Active()->get();
+    $portfolios = Portfolio::query()->Active()->get(['portfolio_id', 'title', 'images', 'service_id', 'status',]);
     $prices = Price::query()->Active()->get();
     $questions = Question::all();
-    $teams = Team::all();
+    $teams = Team::query()->get();
     return view('user.index', compact('about', 'services','portfolios','prices','questions','teams'));
 });
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('portfolio/detail/{id}', [App\Http\Controllers\User\PortfolioController::class, 'show'])->name('portfolio.detail');
+Route::get('portfolio/detail/{id}', [UserPortfolioController::class, 'show'])->name('portfolio.detail');
+
+/*blog */
+Route::get('blogs', [UserBlogController::class, 'index'])->name('blogs');
+Route::get('blog/detail/{id}', [UserBlogController::class, 'show'])->name('blog.detail');
+Route::post('blog/search', [UserBlogController::class, 'search'])->name('blog.search');
+Route::get('blog/service/{id}', [UserBlogController::class, 'service'])->name('blog.service');
+
 
 Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],function(){
     Route::get('dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');

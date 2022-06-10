@@ -303,10 +303,18 @@
                 @endif
 
                 <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
+                    @isset($team->twitter)
+                    <a href="{{ $team->twitter }}"><i class="bi bi-twitter"></i></a>
+                    @endisset
+                    @isset($team->fb)
+                    <a href="{{ $team->fb }}"><i class="bi bi-facebook"></i></a>
+                    @endisset
+                    @isset($team->instagram)
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    @endisset
+                    @isset($team->linkdin)
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    @endisset
                 </div>
               </div>
               <div class="member-info">

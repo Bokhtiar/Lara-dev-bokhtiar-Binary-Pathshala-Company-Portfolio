@@ -12,7 +12,7 @@
           <li><a class="nav-link scrollto" href="{{ url('/') }}#services">Services</a></li>
           <li><a class="nav-link scrollto " href="{{ url('/') }}#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="{{ url('/') }}#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="@route('blogs')">Blog</a></li>
           <li><a class="nav-link scrollto" href="{{ url('/') }}#contact">Contact</a></li>
           <li class="dropdown"><a href="#"><span>{{ Auth::check() ? Auth::user()->name : 'Singup/Login' }}</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
