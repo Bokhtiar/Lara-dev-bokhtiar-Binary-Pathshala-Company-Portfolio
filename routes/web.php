@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
+use App\Http\Controllers\User\ContatController;
 use App\Http\Controllers\User\PortfolioController as UserPortfolioController;
 use App\Models\About;
 use App\Models\Portfolio;
@@ -40,6 +41,8 @@ Route::get('blog/detail/{id}', [UserBlogController::class, 'show'])->name('blog.
 Route::post('blog/search', [UserBlogController::class, 'search'])->name('blog.search');
 Route::get('blog/service/{id}', [UserBlogController::class, 'service'])->name('blog.service');
 
+/*contact */
+Route::post('contact/store', [ContatController::class, 'store']);
 
 Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],function(){
     Route::get('dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');

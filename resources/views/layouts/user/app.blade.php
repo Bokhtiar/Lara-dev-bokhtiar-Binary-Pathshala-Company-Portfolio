@@ -60,7 +60,55 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('user') }}/assets/js/main.js"></script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" charset="utf-8"></script>
+
+
+
+
+
+@if(Session::has('insert'))
+  <script type="text/javascript">
+    swal("Inserted Data","Added Sucessfully...","success")
+  </script>
+@endif
+
+
+@if(Session::has('update'))
+  <script type="text/javascript">
+    swal("Updated Data","Update Sucessfully...","success")
+  </script>
+@endif
+
+@if(Session::has('delete'))
+  <script type="text/javascript">
+    swal("Delete Successfully","Delete Secessfully","success")
+  </script>
+@endif
+
+@if(Session::has('inactive'))
+  <script type="text/javascript">
+    swal("Incomplate","Incomplate Unsuccessfully","success")
+  </script>
+@endif
+
+@if(Session::has('Active'))
+  <script type="text/javascript">
+    swal("Complate","Status Update Successfully","success")
+  </script>
+@endif
+
+@if(Session::has('reset_password'))
+  <script type="text/javascript">
+    swal("Enter your valid Password","Dont matched the password plz inter your valid password...","success")
+  </script>
+@endif
+
+
   @yield('js')
+
+
 
 </body>
 

@@ -56,7 +56,7 @@
                    {{ $blog->body }}.
                   </p>
                   <div class="read-more">
-                    <a href="blog-single.html">Read More</a>
+                    <a href="@route('blog.detail', $blog->blog_id)">Read More</a>
                   </div>
                 </div>
 
