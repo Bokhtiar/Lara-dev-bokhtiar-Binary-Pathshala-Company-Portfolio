@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\webSettingController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ContatController;
 use App\Http\Controllers\User\PortfolioController as UserPortfolioController;
 use App\Models\About;
@@ -46,6 +47,10 @@ Route::post('contact/store', [ContatController::class, 'store']);
 
 Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],function(){
     Route::get('dashboard', [App\Http\Controllers\User\UserDashboardController::class, 'index'])->name('dashboard');
+
+    /*cart*/
+    Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
+
 });
 
 Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']],function(){

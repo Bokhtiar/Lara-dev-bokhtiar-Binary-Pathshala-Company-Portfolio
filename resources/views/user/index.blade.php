@@ -235,7 +235,7 @@
                     <li>{{ $price->item5 }}</li>
                 </ul>
                 <div class="btn-wrap">
-                    <a href="#" class="btn-buy">Buy Now</a>
+                    <a href="@route('user.cart.store', $price->price_id)" class="btn-buy">Buy Now</a>
                 </div>
                 </div>
             </div>

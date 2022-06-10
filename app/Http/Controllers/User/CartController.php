@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class CartController extends Controller
 {
@@ -33,9 +37,26 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $cart = Cart::create([
+                'user_id' => Auth::id(),
+                'price_id' => $id,
+            ]);
+
+            if (!empty($cart)) {
+                DB::commit();
+                Session::flash('insert','Cart Added Sucessfully...');
+                return redirect('/');
+            }
+            throw new \Exception('Invalid About Information');
+        }catch(\Exception $ex){
+            DB::rollBack();
+            dd($ex);
+            return back()->withError($ex->getMessage());
+        }
     }
 
     /**
