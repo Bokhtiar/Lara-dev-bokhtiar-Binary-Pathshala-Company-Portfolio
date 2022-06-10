@@ -14,10 +14,9 @@
           <li><a class="nav-link scrollto" href="{{ url('/') }}#team">Team</a></li>
           <li><a href="@route('blogs')">Blog</a></li>
           <li><a class="nav-link scrollto" href="{{ url('/') }}#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="{{ url('/user/cart') }}">Cart</a></li>
           <li class="dropdown"><a href="#">
               @if (Auth::check())
-                {{ Auth::user()->name }}
+                <span>Dashboard</span>
               @else
               <span>Singup/Login</span>
               @endif
@@ -30,8 +29,8 @@
                     </ul>
             @else
                     <ul>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">SingUp</a></li>
+                    <li><a href="@route('login')">Login</a></li>
+                    <li><a href="@route('register')">SingUp</a></li>
                     </ul>
             @endif
           </li>
