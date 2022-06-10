@@ -18,7 +18,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::item_cart();
+        return view('user.cart.index', compact('carts'));
     }
 
     /**

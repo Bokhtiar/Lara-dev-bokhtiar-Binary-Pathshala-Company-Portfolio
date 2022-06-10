@@ -14,11 +14,26 @@
           <li><a class="nav-link scrollto" href="{{ url('/') }}#team">Team</a></li>
           <li><a href="@route('blogs')">Blog</a></li>
           <li><a class="nav-link scrollto" href="{{ url('/') }}#contact">Contact</a></li>
-          <li class="dropdown"><a href="#"><span>{{ Auth::check() ? Auth::user()->name : 'Singup/Login' }}</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Logout</a></li>
-            </ul>
+          <li><a class="nav-link scrollto" href="{{ url('/user/cart') }}">Cart</a></li>
+          <li class="dropdown"><a href="#">
+              @if (Auth::check())
+                {{ Auth::user()->name }}
+              @else
+              <span>Singup/Login</span>
+              @endif
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            @if (Auth::check())
+                    <ul>
+                    <li><a href="{{ url('user/cart') }}">Cart</a></li>
+                    <li><a href="#">Logout</a></li>
+                    </ul>
+            @else
+                    <ul>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">SingUp</a></li>
+                    </ul>
+            @endif
           </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

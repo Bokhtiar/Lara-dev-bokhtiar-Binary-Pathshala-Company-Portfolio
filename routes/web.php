@@ -50,6 +50,7 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
 
     /*cart*/
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
+    Route::get('cart', [CartController::class, 'index']);
 
 });
 
