@@ -107,7 +107,6 @@
 
                   @foreach ($blogs as $b)
                   <div class="post-item clearfix">
-                    <a href="@route('blog.detail', $blog->blog_id)">
                         @php
                         $image = json_decode($b->image);
                         @endphp
@@ -117,10 +116,9 @@
                             <img class="img-fluid" src="{{ asset($image[0]) }}" alt="">
                         @endif
 
-                        
-                        <h4><a href="blog-single.html">{{ $b->title }}</a></h4>
+
+                        <h4><a href="@route('blog.detail', $b->blog_id)">{{ $b->title }}</a></h4>
                         <time datetime="2020-01-01">{{ $b->created_at->diffForHumans() }}</time>
-                    </a>
                   </div>
                   @endforeach
 

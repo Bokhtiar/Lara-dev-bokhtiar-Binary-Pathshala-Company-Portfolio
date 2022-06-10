@@ -62,8 +62,14 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        $show = Blog::query()->FindID($id);
-        return view('user.blog.detail', compact('show'));
+        try {
+            $services = Service::query()->latest()->Active()->get(['service_id', 'name', 'status']);
+            $blogs = Blog::query()->Active()->latest()->inRandomOrder()->paginate(4);
+            $show = Blog::query()->FindID($id);
+            return view('user.blog.detail', compact('blogs', 'services', 'show'));
+        } catch (\Throwable $th) {
+            abort(500);
+        }
     }
 
     /**
