@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class OrderController extends Controller
 {
@@ -35,7 +39,38 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = Order::query()->Validation($request->all());
+        if($validated){
+            try{
+                DB::beginTransaction();
+                $order = Order::create([
+                    'f_name' => $request->f_name,
+                    'l_name' => $request->l_name,
+                    'email' => $request->email,
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'paymentMethod' => $request->paymentMethod,
+                    'send_number' => $request->send_number,
+                    'secretKey' => $request->secretKey,
+                ]);
+
+                foreach (Cart::item_cart() as $cart) {
+                    $cart['order_id']=$order->order_id;
+                    $cart->save();
+                }
+
+                if (!empty($order)) {
+                    DB::commit();
+                    Session::flash('insert','Order Added Sucessfully...');
+                    return redirect('/');
+                }
+                throw new \Exception('Invalid About Information');
+            }catch(\Exception $ex){
+                DB::rollBack();
+                echo $ex;
+                //return back()->withError($ex->getMessage());
+            }
+        }
     }
 
     /**

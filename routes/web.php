@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\webSettingController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ContatController;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\PortfolioController as UserPortfolioController;
 use App\Models\About;
 use App\Models\Portfolio;
@@ -51,7 +52,8 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
     /*cart*/
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart', [CartController::class, 'index']);
-
+    /*order */
+    Route::post('order/store', [OrderController::class, 'store']);
 });
 
 Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']],function(){
