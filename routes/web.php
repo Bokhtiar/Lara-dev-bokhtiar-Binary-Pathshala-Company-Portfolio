@@ -62,6 +62,8 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
     /*order */
     Route::get('order', [OrderController::class, 'index']);
     Route::post('order/store', [OrderController::class, 'store']);
+    Route::get('order/show/{id}', [OrderController::class, 'show']);
+
     /*logout*/
     Route::get('logout', [App\Http\Controllers\User\UserDashboardController::class, 'logout'])->name('logout');
 

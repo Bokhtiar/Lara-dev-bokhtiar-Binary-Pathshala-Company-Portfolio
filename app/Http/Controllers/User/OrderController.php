@@ -19,7 +19,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Cart::orders(Auth::id());
+        $orders = Order::where('user_id', Auth::id())->get();
         return view('user.order.index', compact('orders'));
     }
 
@@ -50,6 +50,7 @@ class OrderController extends Controller
                     'l_name' => $request->l_name,
                     'email' => $request->email,
                     'phone' => $request->phone,
+                    'user_id' => Auth::id(),
                     'address_1' => $request->address_1,
                     'address_2' => $request->address_2,
                     'paymentMethod' => $request->paymentMethod,
@@ -84,7 +85,13 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $show = Order::query()->FindID($id);
+            $carts = Cart::where('order_id', $id)->get();
+            return view('user.order.show', compact('show', 'carts'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**

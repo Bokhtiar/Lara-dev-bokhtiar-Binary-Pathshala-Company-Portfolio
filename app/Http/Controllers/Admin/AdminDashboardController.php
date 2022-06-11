@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,8 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-
-        return view('admin.index');
+        $orders = Order::latest()->get(['order_id', 'f_name', 'l_name', 'email', 'status']);
+        return view('admin.index', compact('orders'));
     }
 
     /**

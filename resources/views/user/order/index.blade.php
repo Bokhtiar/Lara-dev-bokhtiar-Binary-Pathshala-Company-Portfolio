@@ -97,8 +97,10 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,12 +109,17 @@
                     @endphp
                     @forelse ($orders as $item)
                         <tr class="bg-blue">
-                            <td class="pt-3 mt-1">{{ $item->price ? $item->price->title : 'data not found' }}</td>
-                            <td class="pt-3">TK {{ $item->price ? $item->price->price : 'data not found' }}</td>
-                            @php
-                                $total += $item->price ? $item->price->price : '0' * $item->qty;
-                            @endphp
-                            <td class="pt-3">{{ $item->qty }}<span class="fa fa-check pl-3"></span></td>
+                            <td class="pt-3 mt-1">{{ $item->f_name .' '. $item->l_name }}</td>
+                            <td class="pt-3">{{ $item->email}}</td>
+                            <td class="pt-3">{{ $item->phone}}</td>
+                            @if ($item->status == 0)
+                            <td class="pt-3"><span class="btn btn-danger btn-sm">Pending</span></td>
+
+                            @else
+                            <td class="pt-3"><span class="btn btn-success btn-sm">Success</span></td>
+                            @endif
+                            <td class="pt-3"><a class="btn btn-sm btn-success" href="{{ url('user/order/show', $item->order_id) }}">View</a></td>
+                            <td class="pt-3"></td>
                         </tr>
                         <tr id="spacing-row">
                             <td></td>

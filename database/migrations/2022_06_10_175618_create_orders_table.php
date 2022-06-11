@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('f_name')->require();
             $table->string('l_name')->require();
             $table->string('email')->require();
+            $table->string('user_id')->require();
             $table->string('phone')->require();
             $table->string('address_1')->require();
             $table->string('address_2')->nullable();

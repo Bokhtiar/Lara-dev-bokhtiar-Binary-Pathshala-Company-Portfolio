@@ -59,8 +59,6 @@
                                         <td class="form-inline">
                                             <a class="btn btn-sm btn-info text-light" href="@route('admin.order.show', $item->order_id)"> <i
                                                     class="ri-eye-fill"></i></a>
-                                            <a class="btn btn-sm btn-primary" href="@route('admin.order.edit', $item->order_id)"> <i
-                                                    class="ri-edit-box-fill"></i></a>
                                             <form method="POST" action="@route('admin.order.destroy',$item->order_id)" class="mt-1">
                                                 @csrf
                                                 @method('Delete')

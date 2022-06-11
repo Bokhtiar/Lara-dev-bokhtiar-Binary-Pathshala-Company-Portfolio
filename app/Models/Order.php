@@ -19,6 +19,7 @@ class Order extends Model
         'f_name',
         'l_name',
         'phone',
+        'user_id',
         'email',
         'address_1',
         'address_2',
