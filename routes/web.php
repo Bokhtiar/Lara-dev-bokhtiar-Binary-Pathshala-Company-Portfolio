@@ -52,9 +52,13 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
     /*cart*/
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart', [CartController::class, 'index']);
+    Route::get('cart/destroy/{id}', [CartController::class, 'destroy']);
     /*order */
     Route::get('order', [OrderController::class, 'index']);
     Route::post('order/store', [OrderController::class, 'store']);
+    /*logout*/
+    Route::get('logout', [App\Http\Controllers\User\UserDashboardController::class, 'logout'])->name('logout');
+
 });
 
 Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']],function(){

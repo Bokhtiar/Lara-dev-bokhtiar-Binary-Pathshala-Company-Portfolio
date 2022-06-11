@@ -102,6 +102,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Cart::query()->FindID($id)->delete();
+            Session::flash('remove','Remove Item Sucessfully...');
+            return back();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }

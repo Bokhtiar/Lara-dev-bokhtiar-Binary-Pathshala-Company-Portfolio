@@ -74,6 +74,18 @@
   </script>
 @endif
 
+@if(Session::has('logout'))
+  <script type="text/javascript">
+    swal("Logout","Logout Sucessfully...","success")
+  </script>
+@endif
+
+@if(Session::has('remove'))
+  <script type="text/javascript">
+    swal("Remove Item","Remove Item Sucessfully...","success")
+  </script>
+@endif
+
 
 @if(Session::has('reset_password'))
   <script type="text/javascript">

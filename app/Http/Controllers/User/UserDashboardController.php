@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
 class UserDashboardController extends Controller
 {
@@ -22,9 +24,12 @@ class UserDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function logout()
     {
-        //
+        Auth::logout();
+        Session::flash('logout','Logout Sucessfully...');
+        return redirect('/');
+
     }
 
     /**

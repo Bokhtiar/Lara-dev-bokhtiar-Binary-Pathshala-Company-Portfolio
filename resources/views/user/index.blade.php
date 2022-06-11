@@ -52,7 +52,7 @@
                         <img class="zoom" src="{{ asset($image[0]) }}" height="50px" width="50px" alt="">
                     @endif
                 </div>
-              <h4 class="title"><a href="">{{ $item->name }}</a></h4>
+              <h4 class="title"><a href="#pricing">{{ $item->name }}</a></h4>
               <p class="description text-light">{!! $item->body !!}</p>
             </div>
           </div>

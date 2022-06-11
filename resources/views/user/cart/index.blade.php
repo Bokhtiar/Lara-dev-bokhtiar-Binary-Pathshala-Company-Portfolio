@@ -115,7 +115,7 @@
                             @endphp
                             <td class="pt-3">{{ $item->qty }}<span class="fa fa-check pl-3"></span></td>
                             <td class="pt-3"><span class="fa fa-ellipsis-v btn"></span>
-                                <a href="" class="btn btn-sm btn-danger">Remove</a>
+                                <a href="{{ url('user/cart/destroy', $item->cart_id) }}" class="btn btn-sm btn-danger">Remove</a>
                             </td>
                         </tr>
                         <tr id="spacing-row">
@@ -130,12 +130,15 @@
             </table>
             <div class="float-right">
                 <h4>Total : Tk {{ $total }}</h4>
+                @if (App\Models\Cart::total_item_cart() != 0)
                 <a href="#checkout"  class="btn btn-lg btn-primary">Checkout</a>
+                @endif
               </div>
         </div>
 
 
         {{-- checkout form --}}
+        @if (App\Models\Cart::total_item_cart() != 0)
         <div class="container" id="checkout">
             <div class="py-5 text-center">
                 <h1>{{ $webSetting->title }}</h1>
@@ -293,6 +296,7 @@
             </div>
         </div>
 
+        @endif
     </div>
 
 
