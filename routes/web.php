@@ -13,6 +13,7 @@ use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ContatController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\PortfolioController as UserPortfolioController;
+use App\Http\Controllers\User\SettingController;
 use App\Models\About;
 use App\Models\Portfolio;
 use App\Models\Price;
@@ -42,6 +43,9 @@ Route::get('blogs', [UserBlogController::class, 'index'])->name('blogs');
 Route::get('blog/detail/{id}', [UserBlogController::class, 'show'])->name('blog.detail');
 Route::post('blog/search', [UserBlogController::class, 'search'])->name('blog.search');
 Route::get('blog/service/{id}', [UserBlogController::class, 'service'])->name('blog.service');
+/*footer setting */
+Route::get('term/of/service', [SettingController::class, 'term']);
+Route::get('policy', [SettingController::class, 'policy']);
 
 /*contact */
 Route::post('contact/store', [ContatController::class, 'store']);
