@@ -63,6 +63,18 @@ class OrderController extends Controller
         }
     }
 
+    public function delete($cart_id) //this function order cart item delete for this
+    {
+        try {
+            Cart::query()->FindID($cart_id)->delete();
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+
      /**
      * status change the specified resource from storage.
      *

@@ -99,6 +99,8 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     /*order */
     Route::resource('order', AdminOrderController::class);
     Route::get('order/status/{id}', [AdminOrderController::class, 'status'])->name('order.status');
+    Route::get('cart/delete/{cart_id}', [AdminOrderController::class, 'delete']);
+
     /*logout */
     Route::get('logout', [AdminDashboardController::class, 'logout'])->name('logout');
 });
