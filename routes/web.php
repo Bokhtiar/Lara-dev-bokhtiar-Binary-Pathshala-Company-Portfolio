@@ -68,6 +68,7 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
 
 Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']],function(){
     Route::get('dashboard', [App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [App\Http\Controllers\Admin\AdminDashboardController::class, 'profile'])->name('profile');
     /*service */
     Route::resource('service', ServiceController::class);
     Route::get('service/status/{service_id}', [ServiceController::class, 'status'])->name('service.status');
@@ -92,7 +93,6 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     Route::resource('question', QuestionController::class);
     Route::get('question/status/{id}', [QuestionController::class, 'status'])->name('question.status');
     /*contact */
-    // Route::get('contact', [ContactController::class, 'index']);
     Route::resource('contact', ContactController::class);
     Route::get('contact/status/{id}', [ContactController::class, 'status'])->name('contact.status');
 });
