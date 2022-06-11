@@ -24,7 +24,8 @@
             </a>
             @if (Auth::check())
                     <ul>
-                    <li><a href="{{ url('user/cart') }}">Cart</a></li>
+                    <li><a href="{{ url('user/cart') }}">Cart {{ App\Models\Cart::total_item_cart() }}</a></li>
+                    <li><a href="{{ url('user/order') }}">Order</a></li>
                     <li><a href="#">Logout</a></li>
                     </ul>
             @else

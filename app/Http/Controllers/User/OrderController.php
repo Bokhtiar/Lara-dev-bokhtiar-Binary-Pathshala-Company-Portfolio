@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
 
@@ -18,7 +19,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Cart::orders(Auth::id());
+        return view('user.order.index', compact('orders'));
     }
 
     /**

@@ -67,4 +67,12 @@ class Cart extends Model
           }
         return $cart;
         }
+
+        public static function Orders($user_id){
+            $orders = Cart::where('user_id', $user_id)
+                            ->whereNotNull('order_id')->get();
+            return $orders;
+        }
+
+
 }

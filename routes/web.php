@@ -53,6 +53,7 @@ Route::group(["as"=>'user.', "prefix"=>'user',  "middleware"=>['auth','user']],f
     Route::get('cart/store/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::get('cart', [CartController::class, 'index']);
     /*order */
+    Route::get('order', [OrderController::class, 'index']);
     Route::post('order/store', [OrderController::class, 'store']);
 });
 
