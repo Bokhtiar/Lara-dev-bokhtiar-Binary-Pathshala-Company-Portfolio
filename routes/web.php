@@ -95,4 +95,6 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     /*contact */
     Route::resource('contact', ContactController::class);
     Route::get('contact/status/{id}', [ContactController::class, 'status'])->name('contact.status');
+    /*logout */
+    Route::get('logout', [AdminDashboardController::class, 'logout'])->name('logout');
 });
