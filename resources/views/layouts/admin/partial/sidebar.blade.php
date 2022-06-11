@@ -126,11 +126,6 @@
               <i class="bi bi-circle"></i><span>List Of Order</span>
             </a>
           </li>
-          <li>
-            <a href="@route('admin.order.create')">
-              <i class="bi bi-circle"></i><span>Create Of Order</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End order Nav -->
 

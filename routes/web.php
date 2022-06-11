@@ -102,5 +102,5 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     Route::get('cart/delete/{cart_id}', [AdminOrderController::class, 'delete']);
 
     /*logout */
-    Route::get('logout', [AdminDashboardController::class, 'logout'])->name('logout');
+    Route::get('logout', [App\Http\Controllers\Admin\AdminDashboardController::class, 'logout'])->name('logout');
 });

@@ -57,7 +57,10 @@ class OrderController extends Controller
     {
         try {
             Order::query()->FindID($id)->delete();
-            return redirect()->route('admin.service.index')->with('success','Service Delete successfully!');
+            foreach (Cart::where('order_id', $id)->get() as $cart) {
+                $cart->delete();
+            }
+            return redirect()->route('admin.order.index')->with('success','Service Delete successfully!');
         } catch (\Throwable $th) {
             throw $th;
         }

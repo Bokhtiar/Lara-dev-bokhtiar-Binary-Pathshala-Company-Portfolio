@@ -50,7 +50,7 @@ class CartController extends Controller
             if (!empty($cart)) {
                 DB::commit();
                 Session::flash('insert','Cart Added Sucessfully...');
-                return redirect('/');
+                return redirect('user/cart');
             }
             throw new \Exception('Invalid About Information');
         }catch(\Exception $ex){

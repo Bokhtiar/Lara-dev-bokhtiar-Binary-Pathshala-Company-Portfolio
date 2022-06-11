@@ -16,7 +16,7 @@
           <li><a class="nav-link scrollto" href="{{ url('/') }}#contact">Contact</a></li>
           <li class="dropdown"><a href="#">
               @if (Auth::check())
-                <span>Dashboard</span>
+                <span>{{ Auth::user()->name }}</span>
               @else
               <span>Singup/Login</span>
               @endif
