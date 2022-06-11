@@ -206,6 +206,14 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="address">Contact Number</label>
+                            <input type="text" name="phone" class="form-control" id="phone" placeholder="Contact Number" required>
+                            <div class="invalid-feedback">
+                                we will contact you.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="address">Address</label>
                             <input type="text" name="address_1" class="form-control" id="address" placeholder="1234 Main St" required>
                             <div class="invalid-feedback">

@@ -49,6 +49,7 @@ class OrderController extends Controller
                     'f_name' => $request->f_name,
                     'l_name' => $request->l_name,
                     'email' => $request->email,
+                    'phone' => $request->phone,
                     'address_1' => $request->address_1,
                     'address_2' => $request->address_2,
                     'paymentMethod' => $request->paymentMethod,

@@ -18,6 +18,7 @@ class Order extends Model
     protected $fillable = [
         'f_name',
         'l_name',
+        'phone',
         'email',
         'address_1',
         'address_2',
@@ -41,6 +42,7 @@ class Order extends Model
             'f_name' => 'required',
             'l_name' => 'required',
             'email' => 'required',
+            'phone' => 'required',
             'address_1' => 'required',
             'paymentMethod' => 'required',
             'send_number' => 'required',

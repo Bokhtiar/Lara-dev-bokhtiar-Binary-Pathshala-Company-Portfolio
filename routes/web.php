@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\PriceController;
 use App\Http\Controllers\Admin\QuestionController;
@@ -95,6 +96,9 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     /*contact */
     Route::resource('contact', ContactController::class);
     Route::get('contact/status/{id}', [ContactController::class, 'status'])->name('contact.status');
+    /*order */
+    Route::resource('order', AdminOrderController::class);
+    Route::get('order/status/{id}', [AdminOrderController::class, 'status'])->name('order.status');
     /*logout */
     Route::get('logout', [AdminDashboardController::class, 'logout'])->name('logout');
 });

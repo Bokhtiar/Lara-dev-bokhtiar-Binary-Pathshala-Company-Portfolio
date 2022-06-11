@@ -116,6 +116,24 @@
         </ul>
       </li><!-- End Question Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#Order-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Order</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="Order-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="@route('admin.order.index')">
+              <i class="bi bi-circle"></i><span>List Of Order</span>
+            </a>
+          </li>
+          <li>
+            <a href="@route('admin.order.create')">
+              <i class="bi bi-circle"></i><span>Create Of Order</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End order Nav -->
+
       <li class="nav-heading">Setting</li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="@route('admin.profile')">
