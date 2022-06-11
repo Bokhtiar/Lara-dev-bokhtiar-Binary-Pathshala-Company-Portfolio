@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\PriceController;
 use App\Http\Controllers\Admin\QuestionController;
@@ -89,6 +90,9 @@ Route::group(["as"=>'admin.', "prefix"=>'admin', "middleware"=>['auth','admin']]
     Route::get('price/status/{id}', [PriceController::class, 'status'])->name('price.status');
     /*question */
     Route::resource('question', QuestionController::class);
-    Route::get('question/status/{id}', [QuestionController::class, 'status'])->name(']question.status');
-
+    Route::get('question/status/{id}', [QuestionController::class, 'status'])->name('question.status');
+    /*contact */
+    // Route::get('contact', [ContactController::class, 'index']);
+    Route::resource('contact', ContactController::class);
+    Route::get('contact/status/{id}', [ContactController::class, 'status'])->name('contact.status');
 });
